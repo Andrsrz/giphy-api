@@ -11,16 +11,15 @@ const setButtonEvent = () => {
 	}, false);
 }
 
-const fetchApi = (url) => {
-	fetch(url, {
-	mode: 'cors'}).then((res) => {
-		return res.json();
-	}).then((res) => {
-		img.src = res.data.images.original.url;
-	}).catch((err) => {
+const fetchApi = async (url) => {
+	try{
+		const response = await fetch(url, { mode: 'cors' });
+		const gifData = await response.json();
+		img.src = gifData.data.images.original.url;
+	}catch(err){
 		console.log("API ERROR : " + err);
 		fetchApi(url+cat);
-	});
+	}
 }
 
 // Default Gif
