@@ -17,6 +17,9 @@ const fetchApi = (url) => {
 		return res.json();
 	}).then((res) => {
 		img.src = res.data.images.original.url;
+	}).catch((err) => {
+		console.log("API ERROR : " + err);
+		fetchApi(url+cat);
 	});
 }
 
